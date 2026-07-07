@@ -1,0 +1,65 @@
+# Ambientes virtuais Python
+.venv/
+venv/
+env/
+ENV/
+
+# Cache e arquivos compilados do Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+
+# Variaveis de ambiente e segredos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.*
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+.jupyter/
+
+# Testes, cobertura e ferramentas de qualidade
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Builds e pacotes Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Dados gerados localmente (mantenha data/raw versionado apenas se for publico)
+data/interim/
+data/processed/
+data/external/
+
+# Modelos, resultados e logs gerados
+models/
+outputs/
+results/
+logs/
+*.log
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos temporarios
+*.tmp
+*.temp
+~$*
