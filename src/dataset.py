@@ -3,7 +3,7 @@ import pandas as pd
 from .config import DATASET_PATH
 
 
-def load_dataset() -> pd.DataFrame:
+def carregar_dataset() -> pd.DataFrame:
     """Carrega o dataset bruto"""
     if not DATASET_PATH.is_file():
         raise FileNotFoundError(f"Dataset não encontrado em: {DATASET_PATH}")
