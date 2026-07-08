@@ -44,7 +44,10 @@ data/external/
 
 # Modelos, resultados e logs gerados
 models/
-outputs/
+outputs/*
+!outputs/figures/
+outputs/figures/*
+!outputs/figures/*.png
 results/
 logs/
 *.log
