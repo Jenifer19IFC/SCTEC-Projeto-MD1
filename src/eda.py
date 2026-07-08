@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 from .utils import salvar_grafico
 
 def estatistica_descritiva(df: pd.DataFrame) -> None:
@@ -79,3 +79,29 @@ def visualizar_dados(df: pd.DataFrame) -> None:
     print("Pares com correlação > 0.7:")
     pairs = correlacao.where(np.triu(np.ones(correlacao.shape), k=1).astype(bool)).stack()
     print(pairs[pairs.abs() > 0.7].sort_values(ascending=False))
+
+
+def calcular_vif(df: pd.DataFrame, variavel_alvo: str = None) -> pd.DataFrame:
+    """
+    Calcula o Variance Inflation Factor (VIF) para as variáveis numéricas
+    """
+
+    # Seleciona apenas variáveis numéricas
+    X = df.select_dtypes(include="number").copy()
+
+    # Remove a variável-alvo
+    if variavel_alvo is not None and variavel_alvo in X.columns:
+        X = X.drop(columns=variavel_alvo)
+
+    # Remove colunas constantes
+    X = X.loc[:, X.nunique() > 1]
+
+    vif = pd.DataFrame({
+        "Variável": X.columns,
+        "VIF": [
+            variance_inflation_factor(X.values, i)
+            for i in range(X.shape[1])
+        ]
+    })
+
+    return vif.sort_values("VIF", ascending=False).reset_index(drop=True)
