@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from statsmodels.stats.outliers_influence import variance_inflation_factor
+from statsmodels.tools.tools import add_constant
 from .utils import salvar_grafico
 
 def estatistica_descritiva(df: pd.DataFrame) -> None:
@@ -103,5 +104,34 @@ def calcular_vif(df: pd.DataFrame, variavel_alvo: str = None) -> pd.DataFrame:
             for i in range(X.shape[1])
         ]
     })
+
+    return vif.sort_values("VIF", ascending=False).reset_index(drop=True)
+
+
+def calcular_vif2(df: pd.DataFrame, variavel_alvo: str = None) -> pd.DataFrame:
+    """
+    Calcula o Variance Inflation Factor (VIF) das variáveis numéricas.
+    """
+
+    X = df.select_dtypes(include="number").copy()
+
+    if variavel_alvo in X.columns:
+        X = X.drop(columns=variavel_alvo)
+
+    X = X.loc[:, X.nunique() > 1]
+
+    # Adiciona o intercepto
+    X = add_constant(X)
+
+    vif = pd.DataFrame({
+        "Variável": X.columns,
+        "VIF": [
+            variance_inflation_factor(X.values, i)
+            for i in range(X.shape[1])
+        ]
+    })
+
+    # Remove a constante da tabela final
+    vif = vif[vif["Variável"] != "const"]
 
     return vif.sort_values("VIF", ascending=False).reset_index(drop=True)
