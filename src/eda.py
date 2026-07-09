@@ -84,54 +84,26 @@ def visualizar_dados(df: pd.DataFrame) -> None:
 
 def calcular_vif(df: pd.DataFrame, variavel_alvo: str = None) -> pd.DataFrame:
     """
-    Calcula o Variance Inflation Factor (VIF) para as variáveis numéricas
-    """
-
-    # Seleciona apenas variáveis numéricas
-    X = df.select_dtypes(include="number").copy()
-
-    # Remove a variável-alvo
-    if variavel_alvo is not None and variavel_alvo in X.columns:
-        X = X.drop(columns=variavel_alvo)
-
-    # Remove colunas constantes
-    X = X.loc[:, X.nunique() > 1]
-
-    vif = pd.DataFrame({
-        "Variável": X.columns,
-        "VIF": [
-            variance_inflation_factor(X.values, i)
-            for i in range(X.shape[1])
-        ]
-    })
-
-    return vif.sort_values("VIF", ascending=False).reset_index(drop=True)
-
-
-def calcular_vif2(df: pd.DataFrame, variavel_alvo: str = None) -> pd.DataFrame:
-    """
     Calcula o Variance Inflation Factor (VIF) das variáveis numéricas.
     """
 
+    # Seleciona apenas colunas numércias
     X = df.select_dtypes(include="number").copy()
 
+    # Remove a variável-alvo da análise de VIF
     if variavel_alvo in X.columns:
         X = X.drop(columns=variavel_alvo)
-
-    X = X.loc[:, X.nunique() > 1]
 
     # Adiciona o intercepto
     X = add_constant(X)
 
     vif = pd.DataFrame({
         "Variável": X.columns,
-        "VIF": [
-            variance_inflation_factor(X.values, i)
-            for i in range(X.shape[1])
-        ]
+        "VIF": [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
     })
 
     # Remove a constante da tabela final
     vif = vif[vif["Variável"] != "const"]
 
     return vif.sort_values("VIF", ascending=False).reset_index(drop=True)
+
