@@ -139,8 +139,7 @@ def plotar_residuos(y_test, y_pred):
 
 def salvar_modelo(modelo, metricas, variaveis_explicativas):
     """
-    Salva o modelo treinado e as métricas utilizando
-    versionamento automático.
+    Salva o modelo treinado e as métricas
     """
 
     versao = obter_proxima_versao()
@@ -148,13 +147,8 @@ def salvar_modelo(modelo, metricas, variaveis_explicativas):
 
     pasta_versao.mkdir(parents=True, exist_ok=True)
 
-    caminho_modelo = (
-        pasta_versao / f"modelo_regressao_{versao}.pkl"
-    )
-
-    caminho_metricas = (
-        pasta_versao / f"metricas_{versao}.json"
-    )
+    caminho_modelo = (pasta_versao / f"modelo_regressao_{versao}.pkl")
+    caminho_metricas = (pasta_versao / f"metricas_{versao}.json")
 
     joblib.dump(modelo, caminho_modelo)
 
@@ -170,17 +164,8 @@ def salvar_modelo(modelo, metricas, variaveis_explicativas):
         "variaveis_explicativas": variaveis_explicativas
     }
 
-    with open(
-        caminho_metricas,
-        "w",
-        encoding="utf-8"
-    ) as arquivo:
-        json.dump(
-            informacoes,
-            arquivo,
-            indent=4,
-            ensure_ascii=False
-        )
+    with open(caminho_metricas, "w", encoding="utf-8") as arquivo:
+        json.dump(informacoes, arquivo, indent=4, ensure_ascii=False)
 
     print(f"Modelo salvo na versão {versao}.")
     print(f"Modelo: {caminho_modelo}")
@@ -189,8 +174,7 @@ def salvar_modelo(modelo, metricas, variaveis_explicativas):
 
 def obter_proxima_versao():
     """
-    Identifica as versões existentes e retorna a próxima versão.
-    Exemplo: v1, v2, v3...
+    Verifica versões existentes e retorna a próxima versão
     """
 
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
