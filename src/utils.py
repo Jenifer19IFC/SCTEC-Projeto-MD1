@@ -10,3 +10,4 @@ def salvar_grafico(nome_arquivo: str) -> None:
 
     plt.savefig(caminho, dpi=300, bbox_inches="tight")
     print(f"Gráfico salvo em: {caminho}")
+
