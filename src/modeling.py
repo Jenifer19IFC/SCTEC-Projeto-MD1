@@ -9,6 +9,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import (mean_absolute_error, mean_squared_error, r2_score)
 import matplotlib.pyplot as plt
+import pandas as pd
 from .utils import salvar_grafico
 import json
 import joblib
@@ -18,16 +19,16 @@ from .config import MODELS_DIR
 
 def dividir_treino_teste(df, variavel_alvo, test_size=0.2, random_state=42):
     """
-    Separa o df em treino e teste
+    Separa o df em treino (80%) e teste (20%)
     """
 
-    X = df.drop(columns=variavel_alvo)
-    y = df[variavel_alvo]
+    X = df.drop(columns=variavel_alvo) # explicativas/preditoras (x)
+    y = df[variavel_alvo]              # variável-alvo (y)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
 
     print("=" * 60)
-    print("DIVISÃO TREINO / TESTE")
+    print("DIVISÃO TREINO/TESTE")
     print("=" * 60)
     print(f"Tamanho do treino: {X_train.shape[0]}")
     print(f"Tamanho do teste : {X_test.shape[0]}")
@@ -35,9 +36,9 @@ def dividir_treino_teste(df, variavel_alvo, test_size=0.2, random_state=42):
     return X_train, X_test, y_train, y_test
 
 
-def treinar_regressao_linear(X_train, y_train, X_test):
+def treinar_e_testar_regressao_linear(X_train, y_train, X_test):
     """
-    Treina um modelo de Regressão Linear e realiza as predições no conjunto de teste
+    Treina modelo de Regressão Linear e realiza as predições no conjunto de teste
     """
 
     colunas_categoricas = X_train.select_dtypes(include=["object", "category"]).columns
@@ -61,10 +62,10 @@ def treinar_regressao_linear(X_train, y_train, X_test):
         ]
     )
 
-    # Treina o modelo
+    # Treina o modelo com conjunto de TREINO
     modelo.fit(X_train, y_train)
 
-    # Realiza as predições
+    # Realiza as predições do conjunto de TESTE, ignorando warnings de valores infinitos
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=RuntimeWarning, message=".*matmul.*")
         y_pred = modelo.predict(X_test)
@@ -91,6 +92,29 @@ def avaliar_modelo(y_test, y_pred):
         "RMSE": rmse,
         "R2": r2,
     }
+
+
+def comparar_metricas_treino_teste(modelo, X_train, y_train, X_test, y_test):
+    """
+    Compara as métricas do modelo nos conjuntos de treino e teste
+    """
+
+    y_pred_train = modelo.predict(X_train)
+    y_pred_test  = modelo.predict(X_test)
+
+    metricas_treino = avaliar_modelo(y_train, y_pred_train)
+    metricas_teste  = avaliar_modelo(y_test, y_pred_test)
+
+    comparacao = pd.DataFrame(
+        {
+            "Treino": metricas_treino,
+            "Teste": metricas_teste,
+        }
+    )
+
+    comparacao["Diferença"] = comparacao["Teste"] - comparacao["Treino"]
+
+    return comparacao
 
 
 def plotar_valores_reais_previstos(y_test, y_pred):
@@ -142,12 +166,12 @@ def salvar_modelo(modelo, metricas, variaveis_explicativas):
     Salva o modelo treinado e as métricas
     """
 
-    versao = obter_proxima_versao()
+    versao       = obter_proxima_versao()
     pasta_versao = MODELS_DIR / versao
 
     pasta_versao.mkdir(parents=True, exist_ok=True)
 
-    caminho_modelo = (pasta_versao / f"modelo_regressao_{versao}.pkl")
+    caminho_modelo   = (pasta_versao / f"modelo_regressao_{versao}.pkl")
     caminho_metricas = (pasta_versao / f"metricas_{versao}.json")
 
     joblib.dump(modelo, caminho_modelo)

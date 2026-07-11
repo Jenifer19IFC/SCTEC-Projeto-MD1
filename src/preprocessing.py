@@ -5,7 +5,7 @@ from .utils import salvar_grafico
 
 def verificar_duplicados(df: pd.DataFrame) -> int:
     """
-    Verifica a presença de registros duplicados em um df
+    Verifica a presença de registros duplicados no df
     """
     duplicados = df.duplicated().sum()
 
@@ -57,13 +57,13 @@ def remover_colunas(df: pd.DataFrame, colunas: list[str]) -> pd.DataFrame:
 
 def plotar_boxplots(df: pd.DataFrame, variavel_alvo: str = None, nome_arquivo: str = "boxplots_variaveis_explicativas.png") -> None:
     """
-    Plota boxplots das variáveis numéricas explicativas em um painel de subplots.
+    Plota boxplots das variáveis numéricas explicativas em um painel
     """
 
     # Seleciona somente variáveis numéricas
     colunas = df.select_dtypes(include="number").columns.tolist()
 
-    # Remove a variável-alvo da lista de colunas para não plotar seu boxplot
+    # Remove a variável-alvo da lista de colunas para não plotar no boxplot
     if variavel_alvo in colunas: 
         colunas.remove(variavel_alvo)
 
