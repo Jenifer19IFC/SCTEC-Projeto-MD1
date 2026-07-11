@@ -37,13 +37,13 @@ dist/
 *.egg-info/
 .eggs/
 
-# Dados gerados localmente (mantenha data/raw versionado apenas se for publico)
+# Dados gerados localmente 
 data/interim/
-data/processed/
+# data/processed/
 data/external/
 
 # Modelos, resultados e logs gerados
-models/
+# models/
 outputs/*
 !outputs/figures/
 outputs/figures/*
