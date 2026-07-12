@@ -14,7 +14,11 @@ O modelo deve ser utilizado como ferramenta de apoio analítico e não como subs
 
 ## Dataset
 
-Foi utilizado o arquivo `sleep_health_dataset.csv`, uma base sintética com 100.000 registros e 32 colunas. Ela reúne características como:
+Foi utilizado o dataset **Sleep Health and Daily Performance Dataset**, disponível no **Kaggle**.
+
+**Fonte:** [Sleep Health and Daily Performance Dataset](https://www.kaggle.com/datasets/mohankrishnathalla/sleep-health-and-daily-performance-dataset)
+
+O conjunto de dados sintéticos contém **100.000 registros** e **32 variáveis**, reunindo informações sobre sono, hábitos de vida, indicadores fisiológicos e desempenho cognitivo, bem como:
 
 - duração e qualidade do sono;
 - percentual de sono REM e sono profundo;
