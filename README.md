@@ -1,4 +1,4 @@
-# Previsão de Desempenho Cognitivo com Dados de Sono e Saúde
+# Predição de Desempenho Cognitivo a partir de Dados de Sono e Saúde
 
 Projeto desenvolvido para prever o desempenho cognitivo de uma pessoa no dia seguinte a partir de informações relacionadas ao sono, hábitos de vida, indicadores fisiológicos e fatores comportamentais.
 
