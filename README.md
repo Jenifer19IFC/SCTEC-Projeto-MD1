@@ -175,3 +175,7 @@ Para versões futuras, podem ser considerados:
 ## Observação
 
 Este projeto possui finalidade educacional. Como o dataset é sintético, os resultados não devem ser interpretados como evidência clínica nem generalizados diretamente para cenários reais.
+
+## Demonstração
+
+[▶️ Assistir à apresentação do projeto](https://youtu.be/SEU_LINK)
