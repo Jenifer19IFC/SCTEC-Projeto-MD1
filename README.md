@@ -66,7 +66,7 @@ O pré-processamento faz parte da mesma Pipeline do modelo. Assim, os parâmetro
 
 ## Resultados da versão v1
 
-A versão entregue é a **v1**. O modelo foi avaliado no conjunto de teste, formado por dados que não participaram do treinamento usado na avaliação.
+Após a validação, o modelo foi retreinado utilizando toda a base de dados para geração da versão v1 salva na pasta models/.
 
 | Métrica | Resultado |
 | --- | ---: |
