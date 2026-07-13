@@ -170,7 +170,8 @@ Execute as células na ordem para reproduzir a análise, o tratamento dos dados,
 Para versões futuras, podem ser considerados:
 
 - validação cruzada para obter uma estimativa mais robusta do desempenho;
-- exploração de Feature Engineering na tentativa de alcançar um melhor desempenho.
+- exploração de Feature Engineering na tentativa de alcançar um melhor desempenho;
+- comparar com outro modelo, como o KNN.
 
 ## Observação
 
