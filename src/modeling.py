@@ -35,11 +35,11 @@ def dividir_treino_teste(df, variavel_alvo, test_size=0.2, random_state=42):
 
     return X_train, X_test, y_train, y_test
 
-
+"""
 def treinar_e_testar_regressao_linear(X_train, y_train, X_test):
-    """
-    Treina modelo de Regressão Linear e realiza as predições no conjunto de teste
-    """
+    
+    # Treina modelo de Regressão Linear e realiza as predições no conjunto de teste
+    
 
     colunas_categoricas = X_train.select_dtypes(include=["object", "category"]).columns
     colunas_numericas   = X_train.select_dtypes(exclude=["object", "category"]).columns
@@ -74,6 +74,58 @@ def treinar_e_testar_regressao_linear(X_train, y_train, X_test):
         raise ValueError("As predições possuem valores infinitos ou inválidos.")
 
     return modelo, y_pred
+"""
+
+def treinar_regressao_linear(X, y):
+    """
+    Treina o modelo de Regressão Linear usando todos os dados disponíveis
+    """
+    colunas_categoricas = X.select_dtypes(include=["object", "category"]).columns
+    colunas_numericas   = X.select_dtypes(exclude=["object", "category"]).columns
+
+    pre_processador = ColumnTransformer(
+        transformers=[
+            (
+                "categoricas",
+                OneHotEncoder(drop="first", handle_unknown="ignore", sparse_output=False),
+                colunas_categoricas,
+            ),
+            ("numericas", StandardScaler(), colunas_numericas),
+        ]
+    )
+
+    modelo = Pipeline(
+        steps=[
+            ("pre_processador", pre_processador),
+            ("regressao_linear", LinearRegression()),
+        ]
+    )
+
+    # Treina o modelo com a base completa
+    modelo.fit(X, y)
+
+    return modelo
+
+def realizar_predicao(modelo, X):
+    """
+    Realiza predições a partir do modelo treinado
+    """
+
+    with warnings.catch_warnings():
+        warnings.filterwarnings(
+            "ignore",
+            category=RuntimeWarning,
+            message=".*matmul.*"
+        )
+
+        y_pred = modelo.predict(X)
+
+    if not np.isfinite(y_pred).all():
+        raise ValueError(
+            "As predições possuem valores infinitos ou inválidos."
+        )
+
+    return y_pred
 
 
 def avaliar_modelo(y_test, y_pred):
