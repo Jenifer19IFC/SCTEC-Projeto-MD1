@@ -35,46 +35,6 @@ def dividir_treino_teste(df, variavel_alvo, test_size=0.2, random_state=42):
 
     return X_train, X_test, y_train, y_test
 
-"""
-def treinar_e_testar_regressao_linear(X_train, y_train, X_test):
-    
-    # Treina modelo de Regressão Linear e realiza as predições no conjunto de teste
-    
-
-    colunas_categoricas = X_train.select_dtypes(include=["object", "category"]).columns
-    colunas_numericas   = X_train.select_dtypes(exclude=["object", "category"]).columns
-
-    pre_processador = ColumnTransformer(
-        transformers=[
-            (
-                "categoricas",
-                OneHotEncoder(drop="first", handle_unknown="ignore", sparse_output=False),
-                colunas_categoricas,
-            ),
-            ("numericas", StandardScaler(), colunas_numericas),
-        ]
-    )
-
-    modelo = Pipeline(
-        steps=[
-            ("pre_processador", pre_processador),
-            ("regressao_linear", LinearRegression()),
-        ]
-    )
-
-    # Treina o modelo com conjunto de TREINO
-    modelo.fit(X_train, y_train)
-
-    # Realiza as predições do conjunto de TESTE, ignorando warnings de valores infinitos
-    with warnings.catch_warnings():
-        warnings.filterwarnings("ignore", category=RuntimeWarning, message=".*matmul.*")
-        y_pred = modelo.predict(X_test)
-
-    if not np.isfinite(y_pred).all():
-        raise ValueError("As predições possuem valores infinitos ou inválidos.")
-
-    return modelo, y_pred
-"""
 
 def treinar_regressao_linear(X, y):
     """

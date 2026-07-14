@@ -4,7 +4,7 @@
     "mse": 58.61669243978892,
     "rmse": 7.656153893423833,
     "r2": 0.8807198474226009,
-    "data_treinamento": "2026-07-13 20:50:36",
+    "data_treinamento": "2026-07-14 20:18:01",
     "variaveis_explicativas": [
         "age",
         "gender",

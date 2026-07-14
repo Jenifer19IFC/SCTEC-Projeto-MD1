@@ -8,7 +8,7 @@ O desenvolvimento foi realizado como projeto avaliativo da disciplina Desenvolvi
 
 ## Problema preditivo
 
-O objetivo é estimar a variável `cognitive_performance_score`, uma pontuação de desempenho cognitivo na escala de 0 a 100. A solução utiliza um modelo de regressão e pode apoiar análises sobre como sono, estresse e estilo de vida se relacionam com o desempenho cognitivo.
+O objetivo é estimar a variável `cognitive_performance_score`, uma pontuação de desempenho cognitivo na escala de 0 a 100. A solução utiliza o modelo de regressão linear e pode apoiar análises sobre como sono, estresse e estilo de vida se relacionam com o desempenho cognitivo.
 
 O modelo deve ser utilizado como ferramenta de apoio analítico e não como substituto de uma avaliação clínica.
 
@@ -134,7 +134,7 @@ SCTEC-PROJETO-MD1/
 ### 1. Clone o repositório
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/Jenifer19IFC/SCTEC-Projeto-MD1.git
 cd SCTEC-PROJETO-MD1
 ```
 
