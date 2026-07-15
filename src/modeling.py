@@ -61,7 +61,7 @@ def treinar_regressao_linear(X, y):
         ]
     )
 
-    # Treina o modelo com a base completa
+    # Treina o modelo
     modelo.fit(X, y)
 
     return modelo
