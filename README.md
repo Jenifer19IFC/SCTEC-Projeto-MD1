@@ -180,4 +180,4 @@ Este projeto possui finalidade educacional. Como o dataset é sintético, os res
 
 ## Demonstração
 
-[▶️ Assistir à apresentação do projeto](https://youtu.be/SEU_LINK)
+[▶️ Assistir à apresentação do projeto](https://youtu.be/e6beO8_eZ-A)
