@@ -125,6 +125,7 @@ SCTEC-PROJETO-MD1/
 │   ├── modeling.py       # Treinamento, avaliação e versionamento
 │   └── utils.py          # Funções auxiliares
 ├── requirements.txt
+├── .gitignore
 └── README.md
 └── LICENSE
 ```
