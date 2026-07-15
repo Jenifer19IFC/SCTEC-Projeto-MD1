@@ -172,7 +172,7 @@ Para versões futuras, podem ser considerados:
 
 - validação cruzada para obter uma estimativa mais robusta do desempenho;
 - exploração de Feature Engineering na tentativa de alcançar um melhor desempenho;
-- comparar com outro modelo, como o KNN.
+- comparar com outros modelos, como o KNN e Árvore de Decisão.
 
 ## Observação
 
