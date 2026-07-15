@@ -66,7 +66,7 @@ O pré-processamento faz parte da mesma Pipeline do modelo. Assim, os parâmetro
 - Statsmodels
 - Joblib
 - Git
-- GitHub
+- GitHub (Não foi utilizado branches)
 
 ## Resultados da versão v1
 
